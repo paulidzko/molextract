@@ -25,9 +25,9 @@ class geometryAngstrom(Rule):
                 line = lines.split()
                 counter += 1
                 if counter < 10: # to remove the number from the atoms symbols.
-                    label = str(line[1])[:-1]
+                    label = str(line[1])[:1].upper() + str(line[1])[1:-1].lower()
                 elif counter < 100:
-                    label = str(line[1])[:-2]
+                    label = str(line[1])[:1].upper() + str(line[1])[1:-2].lower()
                 else: 
                     raise Exception("general.atoms can only handle systems up to a size of 99 atoms.")
                 xyz = [float(line[5]), float(line[6]), float(line[7])]
