@@ -6,7 +6,7 @@ from molextract.rule import Rule
 
 
 class geometryAngstrom(Rule):
-    START_TAG = r"                    \*\*\*\* Cartesian Coordinates / bohr, angstrom \*\*\*\*"
+    START_TAG = r"                    \*\*\*\* Cartesian Coordinates / Bohr, Angstrom \*\*\*\*"
     END_TAG = r"                    \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*"
 
     def __init__(self):
