@@ -10,17 +10,21 @@ class CASPT2XmsEnergy(Rule):
 
     def __init__(self):
         super().__init__(self.START_TAG, self.END_TAG)
-        self.state = []
+        if not hasattr(self, "state"): # in super():
+            print("caspt2 initialized")
+            self.state = []
 
-    def process(self, line):
+    def process_lines(self, start_line):
+        energies = []
         for lines in self:
-            line = lines.split()
-        self.state.append(float(line.split()[6]))
+            line = lines.strip()
+            if line[:21] == "::    XMS-CASPT2 Root":
+                energies.append(float(line.split()[6]))
+        self.state.append(energies)
     
     def reset(self):
         tmp = self.state.copy()
         self.state.clear()
-        self.__init__()
         return tmp
 
 

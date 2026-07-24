@@ -18,3 +18,12 @@ class LogRule(RuleListRule):
                          LogRule.END_TAG,
                          rules=rules,
                          **kwargs)
+class CobrammRule(RuleListRule):
+    START_TAG = r"\s+Start QM calculation output of STEP : 0"
+    END_TAG = r"\s+End QM calculation output of STEP : 255"
+
+    def __init__(self, rules=None, **kwargs):
+        super().__init__(LogRule.START_TAG,
+                         LogRule.END_TAG,
+                         rules=rules,
+                         **kwargs)
