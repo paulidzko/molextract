@@ -27,12 +27,14 @@ class Parser:
         """
         self.rule = rule
 
-    def feed(self, data: str, delim: str = '\n') -> Any:
+    def feed(self, data: str, delim: str = '\n', multiple: bool = False) -> Any:
         """
         Execute the rule with the given data, and return the parsed output.
 
         :param data: the raw data to parse
         :param delim: how the raw data should be delimited, defaults to '\n'
+        :param multiple: If keyword is raised several times in data - use this!
+            might not work for all rules! 
         :return: the parsed data
         """
         split = data.split(delim)
@@ -42,7 +44,10 @@ class Parser:
         for line in split_iter:
             if self.rule.start_tag_matches(line):
                 self.rule.process_lines(line)
-                return self.rule.reset()
+                if not multiple:
+                    return self.rule.reset()
+        if multiple:
+            return self.rule.reset()
 
     def cli(self, args: Optional[List[str]] = None):
         """
